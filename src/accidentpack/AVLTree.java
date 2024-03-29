@@ -23,6 +23,17 @@ public class AVLTree {
             this.right = null;
         }
     }
+    
+    Node root;
+    
+    // Counter to keep track of imbalances
+    private int imbalanceCount;
+    
+    // Constructor
+    public AVLTree() {
+        imbalanceCount = 0;
+        root = null;
+    }
 
     // Returns the height of the node
     int Height(Node key) {
@@ -92,8 +103,6 @@ public class AVLTree {
         return root;
     }
 
-    Node Root;
-
     // Performs BST insertion and balances the tree
     Node BSTInsert(Node root, report key) {
         if (root == null)
@@ -102,7 +111,22 @@ public class AVLTree {
             root.left = BSTInsert(root.left, key);
         else
             root.right = BSTInsert(root.right, key);
-        return balanceTree(root);
+
+        // Update height of current node
+        updateHeight(root);
+
+        // Check if imbalance exists
+        int balance = Balance(root);
+        if (balance > 1 || balance < -1) {
+            imbalanceCount++; // Increase imbalance count if imbalance exists
+        }
+
+        // Balance the tree if imbalance count exceeds 1
+        if (imbalanceCount > 1) {
+            root = balanceTree(root);
+            imbalanceCount = 0; // Reset imbalance count after balancing
+        }
+        return root;
     }
 
     // Finds the successor of a node
@@ -132,10 +156,22 @@ public class AVLTree {
                 root.right = Remove(root.right, root.data);
             }
         }
-        if (root == null)
-            return root;
-        else
-            return balanceTree(root);
+
+        // Update height of current node
+        updateHeight(root);
+
+        // Check if imbalance exists
+        int balance = Balance(root);
+        if (balance > 1 || balance < -1) {
+            imbalanceCount++; // Increase imbalance count if imbalance exists
+        }
+
+        // Balance the tree if imbalance count exceeds 1 and root is not null
+        if (imbalanceCount > 1 && root != null) {
+            root = balanceTree(root);
+            imbalanceCount = 0; // Reset imbalance count after balancing
+        }
+        return root;
     }
 
     // Searches for a node with given value
@@ -150,8 +186,8 @@ public class AVLTree {
 
     // Inserts a node with given value into the tree
     void add(report key) {
-        if (findNode(Root, key) == null) {
-            Root = BSTInsert(Root, key);
+        if (findNode(root, key) == null) {
+            root = BSTInsert(root, key);
             System.out.println("Insertion successful");
         } else
             System.out.println("\nKey with the entered value already exists in the tree");
@@ -159,7 +195,7 @@ public class AVLTree {
 
     // Searches for a node with given value in the tree
     int search(report key) {
-        if (findNode(Root, key) == null)
+        if (findNode(root, key) == null)
             return 0;
         else
             return 1;
@@ -167,8 +203,8 @@ public class AVLTree {
 
     // Deletes a node with given value from the tree
     void delete(report key) {
-        if (findNode(Root, key) != null) {
-            Root = Remove(Root, key);
+        if (findNode(root, key) != null) {
+            root = Remove(root, key);
             System.out.println("\nDeletion successful ");
         } else
             System.out.println("\nNo node with entered value found in tree");
