@@ -52,15 +52,15 @@ public class ReportHelper {
      * @param filename the path to the csv file
      * @return a map of states to tree maps of accidents
      */
-    public static TreeMap<String, TreeMap<LocalDate, List<report>>> readAccidentReports(String filename) {
-        TreeMap<String, TreeMap<LocalDate, List<report>>> stateAccidentsMap = new TreeMap<>();
+    public static TreeMap<String, myAVL> readAccidentReports(String filename) {
+        TreeMap<String, myAVL> stateAccidentsMap = new TreeMap<>();
         
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             br.readLine(); // Skip header line
-            int count = 0;
-            int limit = 1000000;
-            while ((line = br.readLine()) != null && count < limit) {
+            //int count = 0;
+            //int limit = 1000000;
+            while ((line = br.readLine()) != null ) {
                 report accidentReport = readfile(line);
                 String state = accidentReport.getState();
                 LocalDate startDate = accidentReport.getStartTime();
@@ -68,23 +68,22 @@ public class ReportHelper {
                 // Check if the state already exists in the outer map
                 if (!stateAccidentsMap.containsKey(state)) {
                     // If not, create a new TreeMap for the state
-                    stateAccidentsMap.put(state, new TreeMap<>());
-                }
-                
+                    stateAccidentsMap.put(state, new myAVL());
+                    
+                    // Get the TreeMap for the current state
+                    myAVL stateAccidents = stateAccidentsMap.get(state);
+                    //add report to AVL tree
+                    stateAccidents.add(accidentReport);
+                    //add avl tree to treemap
+                    stateAccidentsMap.put(state, stateAccidents);
+                }else {
                 // Get the TreeMap for the current state
-                TreeMap<LocalDate, List<report>> stateAccidents = stateAccidentsMap.get(state);
-                
-                // Check if the date already exists in the inner map
-                if (!stateAccidents.containsKey(startDate)) {
-                    // If not, create a new ArrayList for the date
-                    stateAccidents.put(startDate, new ArrayList<>());
+                myAVL stateAccidents = stateAccidentsMap.get(state);
+                //add report to AVL tree
+                stateAccidents.BSTInsert(stateAccidents.root, accidentReport);
+                //add AVL tree to treemap
+                stateAccidentsMap.put(state, stateAccidents);
                 }
-                
-                // Get the ArrayList corresponding to the date
-                List<report> accidentsOnDate = stateAccidents.get(startDate);
-                // Add the accident report to the list
-                accidentsOnDate.add(accidentReport);
-                count++;
             }
         } catch (IOException e) {
             e.printStackTrace();
