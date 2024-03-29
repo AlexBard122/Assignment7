@@ -7,7 +7,7 @@ package accidentpack;
  * Original code pulled from https://github.com/surajsubramanian/AVL-Trees/blob/master/AVLT.java
  * and modified by Devin.
  */
-public class AVLTree {
+public class myAVL {
     // NODE structure
     class Node {
         report data;
@@ -30,7 +30,7 @@ public class AVLTree {
     private int imbalanceCount;
     
     // Constructor
-    public AVLTree() {
+    public myAVL() {
         imbalanceCount = 0;
         root = null;
     }
