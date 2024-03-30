@@ -101,6 +101,42 @@ public class ReportHelper {
         
         return stateAccidentsMap;
     }
+	
+//    /**
+//     * @author Devin C & Alex B
+//     * Reads lines from a csv file and converts them to report objects
+//     * @param filename the path to the csv file
+//     * @return a map of states to tree maps of accidents
+//     */
+//    public static TreeMap<String, myAVL> readAccidentReports(String filename) {
+//        TreeMap<String, myAVL> stateAccidentsMap = new TreeMap<>();
+//        
+//        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+//            String line;
+//            br.readLine(); // Skip header line
+//            //int count = 0;
+//            //int limit = 1000000;
+//            while ((line = br.readLine()) != null ) {
+//                report accidentReport = readfile(line);
+//                String state = accidentReport.getState();
+//                
+//                // Check if the state already exists in the map
+//                if (!stateAccidentsMap.containsKey(state)) {
+//                    // If not, create a new TreeMap for the state
+//                    stateAccidentsMap.put(state, new myAVL());
+//                }
+//                
+//                // Get the TreeMap for the current state
+//                myAVL stateAccidents = stateAccidentsMap.get(state);
+//                
+//                stateAccidents.BSTInsert(stateAccidents.root, accidentReport);
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        
+//        return stateAccidentsMap;
+//    }
     
     /**
      * @author abard & Devin C
