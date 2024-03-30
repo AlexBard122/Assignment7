@@ -263,26 +263,53 @@ public class myAVL {
             PostOrder(key.right);
         System.out.print(key.data.getID() + " ");
     }
-    /**
-     * @author abard
+//    /**
+//     * @author abard
+//     * returns the number of nodes which come after a given node
+//     * & have dates >= the given node
+//     * @param root
+//     * @return int
+//     */
+//    int countAfter(Node root, LocalDate date) {
+//    	if(root == null)
+//    		return 0;
+//    	else
+//    		if(root.data.getStartTime().isBefore(date))
+//    			return countAfter(root.right, date);
+//    		//if root left date is before given date, count root and right root nodes
+//    		if(root.left != null)
+//    			if(root.left.data.getStartTime().isBefore(date))
+//    				return 1 + countAfter(root.right, date);
+//    			else
+//    				return 1 + countAfter(root.right, date) + countAfter(root.left, date);
+//    		return 1 + countAfter(root.right, date);
+//    	
+//    }
+    
+     /**
+     * @author Devin C
      * returns the number of nodes which come after a given node
      * & have dates >= the given node
      * @param root
      * @return int
      */
     int countAfter(Node root, LocalDate date) {
-    	if(root == null)
-    		return 0;
-    	else
-    		if(root.data.getStartTime().isBefore(date))
-    			return countAfter(root.right, date);
-    		//if root left date is before given date, count root and right root nodes
-    		if(root.left != null)
-    			if(root.left.data.getStartTime().isBefore(date))
-    				return 1 + countAfter(root.right, date);
-    			else
-    				return 1 + countAfter(root.right, date) + countAfter(root.left, date);
-    		return 1 + countAfter(root.right, date);
-    	
+        if (root == null)
+            return 0;
+        
+        int count = 0;
+
+        // If current node's date is after the given date, count the entire right subtree and the current node
+        if (root.data.getStartTime().isAfter(date)) {
+            count++; // Increment count for the current node
+            count += countAfter(root.right, date); // Recursively count nodes in the right subtree
+            count += countAfter(root.left, date); // Recursively count nodes in the left subtree
+        } 
+        // If current node's date is not after the given date, count only the right subtree
+        else {
+            count += countAfter(root.right, date);
+        }
+        
+        return count;
     }
 }
