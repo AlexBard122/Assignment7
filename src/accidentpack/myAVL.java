@@ -3,11 +3,11 @@ package accidentpack;
 import java.time.LocalDate;
 
 /**
- * @author surajsubramanian & Devin C
+ * @author surajsubramanian & Devin C & Alex B
  * @version 28 March, 2024
  * This class implements an AVL search tree for report objects.
  * Original code pulled from https://github.com/surajsubramanian/AVL-Trees/blob/master/AVLT.java
- * and modified by Devin.
+ * and modified by Devin & Alex
  */
 public class myAVL {
     // NODE structure

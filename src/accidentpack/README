@@ -1,1 +1,58 @@
 README file
+
+Execution instructions:
+
+From file location of .java files
+type cmd into file explorer
+in cmd.exe:
+	javac report.java
+	javac Reporthelper.java
+	javac program7.java
+	javac myAVL.java
+	java program7 <filepath of accidents.csv> <state> <date>
+									// date must be in format year-month-day xxxx-xx-xx
+
+Alex:
+	GitHub Project Manager
+	Program Debugger
+Tasks:
+	Handling user input
+	Main method setup
+	Main method outputs
+	README file management
+	Parts 2-4 of Assignment6
+Methods:
+	program7:
+		main()
+		countReports()
+		createTreeMap()
+		(Note: countReports() & createTreeMap() are helper methods for main() which are used to make
+		the code's purpose easier to discern)
+	report:
+		(note: original class and methods were provided by Alex but modified by Devin to handle LocalDate objects)
+	ReportHelper:
+		countReportsAVL()
+		convertTime()
+		readfile()
+	myAVL:
+		countAfter()
+		findNode()
+
+Devin:
+Head Programmer
+Program Debugger
+Tasks:
+	Treemap creation
+	Project initialization
+	Part 1 of Assignment7
+Methods:
+	report:
+		(note: original class and methods were provided by Alex but modified by Devin to handle LocalDate objects)
+	ReportHelper:
+		readAccidentReports()
+		readfile()
+		dateConvert() (note: original method made by Dr. Behrooz Mansouri, added by Devin)
+	myAVL:
+		Note: all methods in myAVL class except countAfter() & findNode() were provided and modified by devin
+		but written by surajsubramanian
+	
