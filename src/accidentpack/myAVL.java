@@ -1,5 +1,7 @@
 package accidentpack;
 
+import java.time.LocalDate;
+
 /**
  * @author surajsubramanian & Devin C
  * @version 28 March, 2024
@@ -183,12 +185,25 @@ public class myAVL {
         else
             return findNode(root.right, key);
     }
+    /**
+     * @author abard
+     * Searches for a node with a date greater than or equal to the given date
+     * @param root
+     * @param date
+     * @return node
+     */
+    Node findNode(Node root, LocalDate date) {
+    	if(root == null || date.equals(root.data.getStartTime()) || date.isBefore(root.data.getStartTime()))
+    		return root;
+    	else
+    		return findNode(root.right, date);
+    }
 
     // Inserts a node with given value into the tree
     void add(report key) {
         if (findNode(root, key) == null) {
             root = BSTInsert(root, key);
-            System.out.println("Insertion successful");
+            //System.out.println("Insertion successful");
         } else
             System.out.println("\nKey with the entered value already exists in the tree");
     }
@@ -247,5 +262,27 @@ public class myAVL {
         if (key.right != null)
             PostOrder(key.right);
         System.out.print(key.data.getID() + " ");
+    }
+    /**
+     * @author abard
+     * returns the number of nodes which come after a given node
+     * & have dates >= the given node
+     * @param root
+     * @return int
+     */
+    int countAfter(Node root, LocalDate date) {
+    	if(root == null)
+    		return 0;
+    	else
+    		if(root.data.getStartTime().isBefore(date))
+    			return countAfter(root.right, date);
+    		//if root left date is before given date, count root and right root nodes
+    		if(root.left != null)
+    			if(root.left.data.getStartTime().isBefore(date))
+    				return 1 + countAfter(root.right, date);
+    			else
+    				return 1 + countAfter(root.right, date) + countAfter(root.left, date);
+    		return 1 + countAfter(root.right, date);
+    	
     }
 }

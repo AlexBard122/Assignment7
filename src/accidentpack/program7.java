@@ -33,7 +33,7 @@ public class program7 {
 				
 				
 		//task2 helper method
-		//countReports(state, stringDate, date, report);
+		countReports(state, stringDate, date, report);
 		
 	}
 	/**
@@ -51,10 +51,10 @@ public class program7 {
 		String processTime;
 		//counts number of reports in a given state on and after a given date
 		time1 = System.nanoTime();
-		//int count = ReportHelper.countReports(state, date, report);
+		int count = ReportHelper.countReportsAVL(state, date, report);
 		time2 = System.nanoTime();
 		processTime = ReportHelper.convertTime(time1, time2);
-		//System.out.println(count + " Reports are available for " + state + " on and after the date " + stringDate);
+		System.out.println(count + " Reports are available for " + state + " on and after the date " + stringDate);
 		System.out.println(processTime + " Seconds to calculate the number of reports");
 	}
 
@@ -72,7 +72,7 @@ public class program7 {
 		TreeMap<String, myAVL> report = ReportHelper.readAccidentReports(filePath);
 		time2 = System.nanoTime();
 		processTime = ReportHelper.convertTime(time1, time2);
-		System.out.println(processTime + " Seconds to build the treemap");
+		System.out.println(processTime + " Seconds to build the AVL trees");
 		
 		return report;
 	}

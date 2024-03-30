@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 
+import accidentpack.myAVL.Node;
+
 public class ReportHelper {
 	
 	/**
@@ -30,6 +32,12 @@ public class ReportHelper {
 			return count;
 		}
 	}
+	public static int countReportsAVL(String state, LocalDate date, TreeMap<String, myAVL> report) {
+		myAVL map = report.get(state);
+		Node root = map.root;
+		int count = map.countAfter(map.findNode(root, date), date);
+		return count;
+	}
 	
 	/**
 	 * @author abard
@@ -41,13 +49,15 @@ public class ReportHelper {
 	public static String convertTime(long time1, long time2) {
 		long elapsedTime = time2 - time1;
 		double elapsedTimeSeconds;
-		elapsedTimeSeconds = elapsedTime / 1000000000;
-		return String.valueOf(elapsedTimeSeconds);
+		elapsedTimeSeconds = elapsedTime / 1000000000.0;
+		String returnValue = String.valueOf(elapsedTimeSeconds);
+		returnValue = returnValue.substring(0, 6);
+		return returnValue;
 	}
 	
     
     /**
-     * @author Devin C
+     * @author Devin C & Alex B
      * Reads lines from a csv file and converts them to report objects
      * @param filename the path to the csv file
      * @return a map of states to tree maps of accidents
