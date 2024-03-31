@@ -51,7 +51,7 @@ public class ReportHelper {
 		double elapsedTimeSeconds;
 		elapsedTimeSeconds = elapsedTime / 1000000000.0;
 		String returnValue = String.valueOf(elapsedTimeSeconds);
-		returnValue = returnValue.substring(0, 6);
+		returnValue = returnValue.substring(0, 5);
 		return returnValue;
 	}
 	
