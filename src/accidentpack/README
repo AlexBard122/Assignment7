@@ -52,6 +52,7 @@ Methods:
 		readAccidentReports()
 		readfile()
 		dateConvert() (note: original method made by Dr. Behrooz Mansouri, added by Devin)
+		countTotalRotations()
 	myAVL:
 		Note: all methods in myAVL class except countAfter() & findNode() were provided and modified by devin
 		but written by surajsubramanian
