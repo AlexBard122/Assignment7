@@ -54,6 +54,6 @@ Methods:
 		dateConvert() (note: original method made by Dr. Behrooz Mansouri, added by Devin)
 		countTotalRotations()
 	myAVL:
-		Note: all methods in myAVL class except countAfter() & findNode() were provided and modified by devin
+		Note: all methods in myAVL class except countAfter(), findNode(), getLeftRotationCount(), & getRightRotationCount() were provided and modified by devin
 		but written by surajsubramanian
 	
