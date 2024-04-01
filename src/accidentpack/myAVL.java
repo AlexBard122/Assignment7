@@ -30,10 +30,15 @@ public class myAVL {
     
     // Counter to keep track of imbalances
     private int imbalanceCount;
+    // Counters to keep track of rotations
+    private int leftRotationCount;
+    private int rightRotationCount;
     
     // Constructor
     public myAVL() {
         imbalanceCount = 0;
+        leftRotationCount = 0;
+        rightRotationCount = 0;
         root = null;
     }
 
@@ -68,6 +73,8 @@ public class myAVL {
         x.right = T2;
         updateHeight(x);
         updateHeight(y);
+        // Increment left rotation count
+        leftRotationCount++;
         return y;
     }
 
@@ -79,6 +86,8 @@ public class myAVL {
         y.left = T2;
         updateHeight(y);
         updateHeight(x);
+        // Increment right rotation count
+        rightRotationCount++;
         return x;
     }
 
@@ -282,7 +291,16 @@ public class myAVL {
     				return 1 + countAfter(root.right, date);
     			else
     				return 1 + countAfter(root.right, date) + countAfter(root.left, date);
-    		return 1 + countAfter(root.right, date);
-    	
+    		return 1 + countAfter(root.right, date);    	
+    }
+    
+    // Getter for left rotation count
+    public int getLeftRotationCount() {
+        return leftRotationCount;
+    }
+    
+    // Getter for right rotation count
+    public int getRightRotationCount() {
+        return rightRotationCount;
     }
 }

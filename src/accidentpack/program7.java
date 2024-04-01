@@ -5,6 +5,7 @@ package accidentpack;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -30,6 +31,9 @@ public class program7 {
 		
 		//task1 helper method 
 		TreeMap<String, myAVL> report = createTreeMap(filePath);
+		
+		//task4 helper method
+		countTotalRotations(report);
 				
 				
 		//task2 helper method
@@ -72,8 +76,29 @@ public class program7 {
 		TreeMap<String, myAVL> report = ReportHelper.readAccidentReports(filePath);
 		time2 = System.nanoTime();
 		processTime = ReportHelper.convertTime(time1, time2);
-		System.out.println(processTime + " Seconds to build the AVL trees");
+		System.out.println(processTime + " Seconds to build the AVL trees");		
 		
 		return report;
+	}
+	
+	
+	 /**
+	 * @author Devin C
+	 * Counts the total number of left and right rotations in all AVL trees attached to the TreeMap.
+	 * @param report The TreeMap containing AVL trees.
+	 */
+	private static void countTotalRotations(TreeMap<String, myAVL> report) {
+	    int totalLeftRotations = 0;
+	    int totalRightRotations = 0;
+
+	    // Iterate through TreeMap entries
+	    for (Map.Entry<String, myAVL> entry : report.entrySet()) {
+	        myAVL avlTree = entry.getValue();
+	        totalLeftRotations += avlTree.getLeftRotationCount();
+	        totalRightRotations += avlTree.getRightRotationCount();
+	    }
+
+	    System.out.println("Total number of left rotations in all AVL trees: " + totalLeftRotations);
+	    System.out.println("Total number of right rotations in all AVL trees: " + totalRightRotations);
 	}
 }
